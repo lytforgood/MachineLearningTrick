@@ -1,7 +1,6 @@
-Machine Learning Trick : GBDT_Feature Blending Stacking CascadeForest
+Machine Learning Trick : GBDT_Feature Blending Stacking CascadeForest                           
 ---
 
----
 1. xgboost调参演示.md 
 2. 机器学习算法实践.md  GBDT XGBOOST参数解析+网格搜索
 3. Xgboost_Feature.py  利用Xgboost的叶子节点位置生成新特征封装的函数
@@ -12,10 +11,4 @@ Machine Learning Trick : GBDT_Feature Blending Stacking CascadeForest
 
 
 
-git init
-git add .
-git commit -m "commit"
-git remote add origin https://github.com/lytforgood/MachineLearningTrick.git
-git remote rm origin
-git push -u origin master
-git pull origin master
+
