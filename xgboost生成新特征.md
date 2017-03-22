@@ -11,7 +11,10 @@ X, y = make_hastie_10_2(random_state=0)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)##test_size测试集合所占比例
 ##自己设置xgboost模型参数 默认树个数30 
 model=XgboostFeature(n_estimators=50)
+##切分训练集训练叶子特征模型 返回值是 原特征+新特征
 X_train,y_train, X_test, y_test=model.fit_model_split(X_train, y_train,X_test, y_test)
+##不切分训练集训练叶子特征模型  返回值 是原特征+新特征
+X_train,y_train, X_test, y_test=model.fit_model(X_train, y_train,X_test, y_test)
 ```
 ##详细过程
 ```python
