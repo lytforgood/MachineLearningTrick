@@ -5,8 +5,23 @@ from xgboost.sklearn import XGBClassifier
 import numpy as np
 
 class XgboostFeature():
-      def __init__(self):
-          print('Xgboost Feature start')
+      ##可以传入xgboost的参数
+      ##常用传入特征的个数 即树的个数 默认30
+      def __init__(self,n_estimators=30,learning_rate =0.3,max_depth=3,min_child_weight=1,gamma=0.3,subsample=0.8,colsample_bytree=0.8,objective= 'binary:logistic',nthread=4,scale_pos_weight=1,reg_alpha=1e-05,reg_lambda=1,seed=27):
+          self.n_estimators=n_estimators
+          self.learning_rate=learning_rate
+          self.max_depth=max_depth
+          self.min_child_weight=min_child_weight
+          self.gamma=gamma
+          self.subsample=subsample
+          self.colsample_bytree=colsample_bytree
+          self.objective=objective
+          self.nthread=nthread
+          self.scale_pos_weight=scale_pos_weight
+          self.reg_alpha=reg_alpha
+          self.reg_lambda=reg_lambda
+          self.seed=seed
+          print 'Xgboost Feature start, new_feature number:',n_estimators
       def mergeToOne(self,X,X2):
           X3=[]
           for i in xrange(X.shape[0]):
@@ -19,19 +34,19 @@ class XgboostFeature():
           ##X_train_1用于生成模型  X_train_2用于和新特征组成新训练集合
           X_train_1, X_train_2, y_train_1, y_train_2 = train_test_split(X_train, y_train, test_size=0.6, random_state=0)
           clf = XGBClassifier(
-                 learning_rate =0.3, #默认0.3
-                 n_estimators=30, #树的个数
-                 max_depth=3,
-                 min_child_weight=1,
-                 gamma=0.3,
-                 subsample=0.8,
-                 colsample_bytree=0.8,
-                 objective= 'binary:logistic', #逻辑回归损失函数
-                 nthread=4,  #cpu线程数
-                 scale_pos_weight=1,
-                 reg_alpha=1e-05,
-                 reg_lambda=1,
-                 seed=27)
+                 learning_rate =self.learning_rate,
+                 n_estimators=self.n_estimators,
+                 max_depth=self.max_depth,
+                 min_child_weight=self.min_child_weight,
+                 gamma=self.gamma,
+                 subsample=self.subsample,
+                 colsample_bytree=self.colsample_bytree,
+                 objective= self.objective,
+                 nthread=self.nthread,
+                 scale_pos_weight=self.scale_pos_weight,
+                 reg_alpha=self.reg_alpha,
+                 reg_lambda=self.reg_lambda,
+                 seed=self.seed)
           clf.fit(X_train_1, y_train_1)
           y_pre= clf.predict(X_train_2)
           y_pro= clf.predict_proba(X_train_2)[:,1]
@@ -46,19 +61,19 @@ class XgboostFeature():
       ##整体训练
       def fit_model(self,X_train,y_train,X_test,y_test):
           clf = XGBClassifier(
-                 learning_rate =0.3, #默认0.3
-                 n_estimators=30, #树的个数
-                 max_depth=3,
-                 min_child_weight=1,
-                 gamma=0.3,
-                 subsample=0.8,
-                 colsample_bytree=0.8,
-                 objective= 'binary:logistic', #逻辑回归损失函数
-                 nthread=4,  #cpu线程数
-                 scale_pos_weight=1,
-                 reg_alpha=1e-05,
-                 reg_lambda=1,
-                 seed=27)
+                 learning_rate =self.learning_rate,
+                 n_estimators=self.n_estimators,
+                 max_depth=self.max_depth,
+                 min_child_weight=self.min_child_weight,
+                 gamma=self.gamma,
+                 subsample=self.subsample,
+                 colsample_bytree=self.colsample_bytree,
+                 objective= self.objective,
+                 nthread=self.nthread,
+                 scale_pos_weight=self.scale_pos_weight,
+                 reg_alpha=self.reg_alpha,
+                 reg_lambda=self.reg_lambda,
+                 seed=self.seed)
           clf.fit(X_train, y_train)
           y_pre= clf.predict(X_test)
           y_pro= clf.predict_proba(X_test)[:,1]

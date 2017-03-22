@@ -1,19 +1,17 @@
 ##导入模块使用
-需要根据实际情况修改里面xgboost参数
+需要根据实际情况修改xgboost参数
 ```
-from Xgboost_Feature import XgboostFeature
-
 from sklearn.model_selection import train_test_split
 from sklearn import metrics
 from sklearn.datasets  import  make_hastie_10_2
 from xgboost.sklearn import XGBClassifier
+from Xgboost_Feature import XgboostFeature
 
 X, y = make_hastie_10_2(random_state=0)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)##test_size测试集合所占比例
-model=XgboostFeature()
+##自己设置xgboost模型参数 默认树个数30 
+model=XgboostFeature(n_estimators=50)
 X_train,y_train, X_test, y_test=model.fit_model_split(X_train, y_train,X_test, y_test)
-model=XgboostFeature()
-X_train,y_train, X_test, y_test=model.fit_model(X_train, y_train,X_test, y_test)
 ```
 ##详细过程
 ```python
